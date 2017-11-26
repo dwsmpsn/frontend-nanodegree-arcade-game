@@ -66,21 +66,27 @@ Player.prototype.handleInput = function(key) {
         }
     }
     if (key == 'down') {
-        if (player.y < 303) {
+        if (player.y < 308) {
             player.y += 83;
         }
     }
 };
+
+//creating array variables of enemy track y-values
+var enemyTracks = [60, 143, 226];
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
 
-var enemy = new Enemy(-202, 83, 100);
-allEnemies.push(enemy);
+for (i = 0; i < 4; i++) {
+    var rand = enemyTracks[Math.floor(Math.random() * enemyTracks.length)];
+    var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 256));
+    allEnemies.push(enemy);
+}
 
-var player = new Player(202, 385, 50);
+var player = new Player(202, 390, 200);
 
 
 // This listens for key presses and sends the keys to your
