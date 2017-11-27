@@ -23,8 +23,6 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = -202;
     }
-
-    checkCollisions();
 };
 
 // Draw the enemy on the screen, required method for game
@@ -47,6 +45,10 @@ var Player = function(x, y, speed) {
 
 Player.prototype.update = function(dt) {
     this.speed += this.speed * dt;
+    //checking if player has reached the waterline
+    if (this.y < 50) {
+        setTimeout(youWin(),2000);
+    }
 };
 
 Player.prototype.render = function() {
@@ -76,17 +78,30 @@ Player.prototype.handleInput = function(key) {
     }
 };
 
+var score = 0;
+
 var checkCollisions = function() {
-    if (player.x < enemy.x + enemy.width  && 
-        player.x + player.width  > enemy.x &&
-        player.y < enemy.y + enemy.height && 
-        player.y + player.height > enemy.y) 
-    {
-        player.x = 202;
-        player.y = 390;
+    for (i = 0; i < allEnemies.length; i++) {
+        if (player.x < allEnemies[i].x + allEnemies[i].width  && 
+            player.x + player.width  > allEnemies[i].x &&
+            player.y < allEnemies[i].y + allEnemies[i].height && 
+            player.y + player.height > allEnemies[i].y) 
+        {
+            score = 0;
+            document.getElementById('score').innerHTML = "<h1>Score reset...</h1><br><h3>Wins: " + score + "</h3>";
+            player.x = 202;
+            player.y = 390;
+        }
     }
 };
 
+var youWin = function() {
+    score += 1;
+    document.getElementById('score').innerHTML = "<h1>You win!</h1><br><h3>Wins: " + score + "</h3>";
+
+    player.x = 202;
+    player.y = 390;
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -96,9 +111,12 @@ var allEnemies = [];
 //creating array variables of enemy track y-values
 var enemyTracks = [60, 143, 226];
 
+//generating enemies to push to allEnemies
 for (i = 0; i < 4; i++) {
+    //randomly choose a stone track to generate on
     var rand = enemyTracks[Math.floor(Math.random() * enemyTracks.length)];
-    var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 300));
+    //create enemy, spawn off-canvas, and set speed with a minimum
+    var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 300 + 50));
     allEnemies.push(enemy);
 }
 
