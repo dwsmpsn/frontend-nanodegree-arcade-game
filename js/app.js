@@ -5,6 +5,8 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = 70;
+    this.height = 50;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -21,6 +23,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x >= 505) {
         this.x = -202;
     }
+
+    console.log(player.x + player.width);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -36,13 +40,14 @@ var Player = function(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = 83;
+    this.height = 83;
     this.sprite = 'images/char-boy.png';
-
-
 };
 
 Player.prototype.update = function(dt) {
     this.speed += this.speed * dt;
+    //checkCollisions();
 };
 
 Player.prototype.render = function() {
@@ -73,18 +78,31 @@ Player.prototype.handleInput = function(key) {
 };
 
 var checkCollisions = function() {
-    //filler for now
+    /*if (player.x > enemy.x &&
+        player.x < enemy.x+enemy.width &&
+        player.y > enemy.y &&
+        player.y < enemy.y+enemy.height) {
+        player.x = 202;
+        player.y = 390;
+    }*/
+    if (player.x < enemy.x + enemy.width  && player.x + player.width  > enemy.x &&
+        player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
+        // The objects are touching
+        player.x = 202;
+        player.y = 390;
+    }
 };
 
-//creating array variables of enemy track y-values
-var enemyTracks = [60, 143, 226];
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
 
-for (i = 0; i < 5; i++) {
+//creating array variables of enemy track y-values
+var enemyTracks = [60, 143, 226];
+
+for (i = 0; i < 4; i++) {
     var rand = enemyTracks[Math.floor(Math.random() * enemyTracks.length)];
     var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 300));
     allEnemies.push(enemy);
