@@ -79,6 +79,7 @@ Player.prototype.handleInput = function(key) {
 };
 
 var score = 0;
+var highScore = 0;
 
 var checkCollisions = function() {
     for (i = 0; i < allEnemies.length; i++) {
@@ -87,8 +88,11 @@ var checkCollisions = function() {
             player.y < allEnemies[i].y + allEnemies[i].height && 
             player.y + player.height > allEnemies[i].y) 
         {
+            if (score > highScore) {
+                highScore = score;
+            }
             score = 0;
-            document.getElementById('score').innerHTML = "<h1>Score reset...</h1><br><h3>Wins: " + score + "</h3>";
+            document.getElementById('score').innerHTML = "<h1>Score reset...</h1><br><h3>High Score:" + highScore + ", Score: " + score + "</h3>";
             player.x = 202;
             player.y = 390;
         }
@@ -97,7 +101,7 @@ var checkCollisions = function() {
 
 var youWin = function() {
     score += 1;
-    document.getElementById('score').innerHTML = "<h1>You win!</h1><br><h3>Wins: " + score + "</h3>";
+    document.getElementById('score').innerHTML = "<h1>You win!</h1><br><h3>High Score:" + highScore + ", Score: " + score + "</h3>";
 
     player.x = 202;
     player.y = 390;
