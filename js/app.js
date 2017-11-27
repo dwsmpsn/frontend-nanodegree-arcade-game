@@ -47,7 +47,7 @@ Player.prototype.update = function(dt) {
     this.speed += this.speed * dt;
     //checking if player has reached the waterline
     if (this.y < 50) {
-        setTimeout(youWin(),2000);
+        setTimeout(this.youWin(),2000);
     }
 };
 
@@ -57,23 +57,23 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(key) {
     if (key == 'left') {
-        if (player.x > 0) {
-            player.x -= 101;
+        if (this.x > 0) {
+            this.x -= 101;
         }
     }
     if (key == 'right') {
-        if (player.x < 404) {
-            player.x += 101;
+        if (this.x < 404) {
+            this.x += 101;
         }
     }
     if (key == 'up') {
-        if (player.y > 0) {
-            player.y -= 83;
+        if (this.y > 0) {
+            this.y -= 83;
         }
     }
     if (key == 'down') {
-        if (player.y < 308) {
-            player.y += 83;
+        if (this.y < 308) {
+            this.y += 83;
         }
     }
 };
@@ -99,12 +99,12 @@ var checkCollisions = function() {
     }
 };
 
-var youWin = function() {
+Player.prototype.youWin = function() {
     score += 1;
-    document.getElementById('score').innerHTML = "<h1>You win!</h1><br><h3>High Score:" + highScore + ", Score: " + score + "</h3>";
+    document.getElementById('score').innerHTML = "<h1>You win!</h1><br><h3>High Score: " + highScore + ", Score: " + score + "</h3>";
 
-    player.x = 202;
-    player.y = 390;
+    this.x = 202;
+    this.y = 390;
 };
 
 // Now instantiate your objects.
