@@ -72,6 +72,10 @@ Player.prototype.handleInput = function(key) {
     }
 };
 
+var checkCollisions = function() {
+    //filler for now
+};
+
 //creating array variables of enemy track y-values
 var enemyTracks = [60, 143, 226];
 
@@ -80,9 +84,9 @@ var enemyTracks = [60, 143, 226];
 // Place the player object in a variable called player
 var allEnemies = [];
 
-for (i = 0; i < 4; i++) {
+for (i = 0; i < 5; i++) {
     var rand = enemyTracks[Math.floor(Math.random() * enemyTracks.length)];
-    var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 256));
+    var enemy = new Enemy(-202, rand, Math.floor(Math.random() * 300));
     allEnemies.push(enemy);
 }
 

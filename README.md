@@ -10,3 +10,4 @@ Resources consulted in research:
 
 http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
 https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
+https://developer.mozilla.org
