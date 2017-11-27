@@ -25,3 +25,4 @@ Just open **index.html** in your browser and you're good to go.
 * http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
 * https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
 * https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
