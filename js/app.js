@@ -24,7 +24,7 @@ Enemy.prototype.update = function(dt) {
         this.x = -202;
     }
 
-    console.log(player.x + player.width);
+    checkCollisions();
 };
 
 // Draw the enemy on the screen, required method for game
@@ -47,7 +47,6 @@ var Player = function(x, y, speed) {
 
 Player.prototype.update = function(dt) {
     this.speed += this.speed * dt;
-    //checkCollisions();
 };
 
 Player.prototype.render = function() {
@@ -78,16 +77,11 @@ Player.prototype.handleInput = function(key) {
 };
 
 var checkCollisions = function() {
-    /*if (player.x > enemy.x &&
-        player.x < enemy.x+enemy.width &&
-        player.y > enemy.y &&
-        player.y < enemy.y+enemy.height) {
-        player.x = 202;
-        player.y = 390;
-    }*/
-    if (player.x < enemy.x + enemy.width  && player.x + player.width  > enemy.x &&
-        player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
-        // The objects are touching
+    if (player.x < enemy.x + enemy.width  && 
+        player.x + player.width  > enemy.x &&
+        player.y < enemy.y + enemy.height && 
+        player.y + player.height > enemy.y) 
+    {
         player.x = 202;
         player.y = 390;
     }
